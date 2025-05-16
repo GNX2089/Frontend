@@ -9,16 +9,16 @@ const Enquiry = ({ score, setScore, setFirstname, setLeaderboard }) => {
       if (!window.userId) return;
 
       try {
-        let response = await fetch(`/users/${window.userId}`);
+        let response = await fetch(`https://gnx2089-backend-fde4.twc1.net/users/${window.userId}`);
        
         if (response.status === 404) {
-          await fetch('/users/create', {
+          await fetch('https://gnx2089-backend-fde4.twc1.net/users/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: window.userId, firstname: window.firstName }),
           });
 
-          response = await fetch(`/users/${window.userId}`);
+          response = await fetch(`https://gnx2089-backend-fde4.twc1.net/users/${window.userId}`);
         }
 
         const userData = await response.json();
@@ -48,7 +48,7 @@ const Enquiry = ({ score, setScore, setFirstname, setLeaderboard }) => {
       if (!window.userId) return;
 
       try {
-        await fetch('/users/update', {
+        await fetch('https://gnx2089-backend-fde4.twc1.net/users/update', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: window.userId, points: score }),
@@ -64,7 +64,7 @@ const Enquiry = ({ score, setScore, setFirstname, setLeaderboard }) => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch('/users/leaderboard');
+        const response = await fetch('https://gnx2089-backend-fde4.twc1.net/users/leaderboard');
         if (!response.ok) throw new Error('Ошибка загрузки');
         const data = await response.json();
         setLeaderboard(data);
